@@ -21,13 +21,13 @@ public partial class MainWindow : Window
 {
     ObservableCollection<string> words = new ObservableCollection<string>();
     public ObservableCollection<string> fittingWords { get; set; }
-    bool allow=false;
+    bool allow = false;
     int i = 0;
     int startCount = 0;
     public MainWindow()
     {
         InitializeComponent();
-        DataContext= this;
+        DataContext = this;
         fittingWords = new();
     }
 
@@ -36,14 +36,14 @@ public partial class MainWindow : Window
         if (!words.Contains(tb.Text))
         {
             words.Add(tb.Text);
-            tb.Text= string.Empty;
+            tb.Text = string.Empty;
         }
-           
+
     }
 
     private void Button_Click_1(object sender, RoutedEventArgs e)
     {
-        tb.Text= String.Empty;
+        tb.Text = String.Empty;
     }
 
     private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -78,37 +78,72 @@ public partial class MainWindow : Window
                         fittingWords.Add(word);
                     }
 
-                    if (word.ToLower().StartsWith(tb.Text.ToLower()) && startCount==0)
+                    if (word.ToLower().StartsWith(tb.Text.ToLower()) && startCount == 0)
                         fittingWords.Add(word);
                 }
             });
         });
     }
     int tempStartIndex;
+    bool isFirstTime = true;
     private void Button_Click_4(object sender, RoutedEventArgs e)
     {
-        var selectedWord = fittingWords[i];
-        var startIndex= tempStartIndex;
-        if (i==0)
+        if (i >= 0)
         {
-            startIndex = tb.Text.Length;
-            tempStartIndex = startIndex;
-            startCount = startIndex;
-        }
-        
-        var length = selectedWord.Length - startIndex;
-        lb.SelectedIndex = i;
-        if (i < fittingWords.Count - 1)
-            i++;
-        tb.Text=lb.SelectedItem.ToString(); 
-        tb.SelectionBrush = Brushes.Gray;
+            var selectedWord = fittingWords[i];
+            var startIndex = tempStartIndex;
+            if (i == 0)
+            {
+                startIndex = tb.Text.Length;
+                tempStartIndex = startIndex;
+                if (isFirstTime)
+                {
+                    startCount = startIndex;
+                    isFirstTime= false;
+                }
+            }
 
-        tb.Select(startIndex, length);
-        tb.Focus();
+            var length = selectedWord.Length - startIndex;
+            lb.SelectedIndex = i;
+            if (i < fittingWords.Count - 1)
+                ++i;
+
+            tb.Text = lb.SelectedItem.ToString();
+            tb.SelectionBrush = Brushes.Gray;
+            tb.Select(startIndex, length);
+            tb.Focus();
+
+        }
     }
 
-    private void lb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void Button_Click_5(object sender, RoutedEventArgs e)
     {
-        //tb.Text = lb.SelectedItem.ToString();
+        string selectedWord;
+        if (i != 0 && i > 0)
+        {
+            i = i - 1;
+            selectedWord = fittingWords[i];
+            lb.SelectedIndex = i;
+        }
+        else
+        {
+            i = 0;
+            selectedWord = fittingWords[i];
+            lb.SelectedIndex = i;
+        }
+        var startIndex = tempStartIndex;
+
+
+        var length = selectedWord.Length - startIndex;
+        
+        if (i >= 1)
+            --i;
+        if (lb.SelectedItem is not null)
+            tb.Text = lb.SelectedItem.ToString();
+
+        tb.SelectionBrush = Brushes.Gray;
+        tb.Select(startIndex, length);
+        tb.Focus();
+
     }
 }

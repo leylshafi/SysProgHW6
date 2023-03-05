@@ -16,7 +16,7 @@
         <StackPanel Margin="40">
             <TextBox x:Name="tb" Height="100" TextChanged="tb_TextChanged" ></TextBox>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <ListBox x:Name="lb" Height="100" ItemsSource="{Binding fittingWords}" Padding="3" SelectionChanged="lb_SelectionChanged"></ListBox>
+            <ListBox x:Name="lb" Height="100" ItemsSource="{Binding fittingWords}" Padding="3" ></ListBox>
             </ScrollViewer>
         </StackPanel>
         
@@ -31,7 +31,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Width="60" Height="60" FontSize="40">⇧</Button>
+            <Button Width="60" Height="60" FontSize="40" Grid.RowSpan="2" VerticalAlignment="Top" Click="Button_Click_5">⇧</Button>
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
                 <Button Width="60" Height="60" Margin="30 0" FontSize="40" Click="Button_Click_3">⇦</Button>
                 <Button Width="60" Height="60"  Margin="30 0" FontSize="40" Click="Button_Click_2">⇨</Button>
