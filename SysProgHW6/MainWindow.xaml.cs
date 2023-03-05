@@ -23,6 +23,7 @@ public partial class MainWindow : Window
     public ObservableCollection<string> fittingWords { get; set; }
     bool allow=false;
     int i = 0;
+    int startCount = 0;
     public MainWindow()
     {
         InitializeComponent();
@@ -53,8 +54,7 @@ public partial class MainWindow : Window
 
     private void Button_Click_3(object sender, RoutedEventArgs e)
     {
-        // tb.Focus();
-        // tb.Select(tb.Text.);
+        tb.Text = String.Empty;
     }
 
     private void tb_TextChanged(object sender, TextChangedEventArgs e)
@@ -73,32 +73,33 @@ public partial class MainWindow : Window
 
                 foreach (var word in words)
                 {
-                    if (word.ToLower().StartsWith(tb.Text.ToLower()))
+                    if (startCount > 0 && word.ToLower().StartsWith(tb.Text.Substring(0, startCount).ToLower()))
+                    {
+                        fittingWords.Add(word);
+                    }
+
+                    if (word.ToLower().StartsWith(tb.Text.ToLower()) && startCount==0)
                         fittingWords.Add(word);
                 }
-
-                //if (fittingWords.Count > 0 && allow == true)
-                //{
-                //    var selectedWord = fittingWords[0];
-
-                //    var startIndex = tb.Text.Length;
-                //    var lenght = selectedWord.Length - tb.Text.Length;
-
-                //    tb.Text += selectedWord.Remove(0, startIndex);
-                //    tb.Select(startIndex, lenght);
-                //}
-                //allow = false;
             });
         });
     }
-
+    int tempStartIndex;
     private void Button_Click_4(object sender, RoutedEventArgs e)
     {
         var selectedWord = fittingWords[i];
-        var startIndex = tb.Text.Length;
-        var length = selectedWord.Length - tb.Text.Length;
+        var startIndex= tempStartIndex;
+        if (i==0)
+        {
+            startIndex = tb.Text.Length;
+            tempStartIndex = startIndex;
+            startCount = startIndex;
+        }
+        
+        var length = selectedWord.Length - startIndex;
         lb.SelectedIndex = i;
-        i++; 
+        if (i < fittingWords.Count - 1)
+            i++;
         tb.Text=lb.SelectedItem.ToString(); 
         tb.SelectionBrush = Brushes.Gray;
 
