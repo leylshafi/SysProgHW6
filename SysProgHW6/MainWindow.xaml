@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <!--<controls:AutoCompleteBox Margin="20" x:Name="tb"></controls:AutoCompleteBox>-->
         <StackPanel Margin="40">
-            <TextBox x:Name="tb" Height="100" TextChanged="tb_TextChanged" ></TextBox>
+            <TextBox x:Name="tb" Height="100" TextChanged="tb_TextChanged"></TextBox>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
             <ListBox x:Name="lb" Height="100" ItemsSource="{Binding fittingWords}" Padding="3" ></ListBox>
             </ScrollViewer>
@@ -42,8 +42,8 @@
                 <Button Grid.Row="2" Width="80" Height="40" FontSize="20" Click="Button_Click">Add</Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center">
-                <Button Grid.Row="2" Width="80" Height="50" >1</Button>
-                <Button Grid.Row="2" Width="80" Height="50" Margin="90 0">2 ABC</Button>
+                <Button Grid.Row="2" Width="80" Height="50" Click="Button_Click_6" >1</Button>
+                <Button Grid.Row="2" Width="80" Height="50" Margin="90 0" Click="Button_Click_7">2 ABC</Button>
                 <Button Grid.Row="2" Width="80" Height="50" >3 DEF</Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
@@ -57,9 +57,9 @@
                 <Button Grid.Row="2" Width="80" Height="50" >9 WYXZ</Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="6" HorizontalAlignment="Center">
-                <Button Grid.Row="2" Width="80" Height="50" >*</Button>
-                <Button Grid.Row="2" Width="80" Height="50" Margin="90 0">0</Button>
-                <Button Grid.Row="2" Width="80" Height="50" >#</Button>
+                <Button Grid.Row="2" Width="80" Height="50" Click="Button_Click_6" >*</Button>
+                <Button Grid.Row="2" Width="80" Height="50" Margin="90 0" Click="Button_Click_6">0</Button>
+                <Button Grid.Row="2" Width="80" Height="50" Click="Button_Click_6" >#</Button>
             </StackPanel>
             
         </Grid>

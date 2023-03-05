@@ -99,7 +99,7 @@ public partial class MainWindow : Window
                 if (isFirstTime)
                 {
                     startCount = startIndex;
-                    isFirstTime= false;
+                    isFirstTime = false;
                 }
             }
 
@@ -135,7 +135,7 @@ public partial class MainWindow : Window
 
 
         var length = selectedWord.Length - startIndex;
-        
+
         if (i >= 1)
             --i;
         if (lb.SelectedItem is not null)
@@ -146,4 +146,48 @@ public partial class MainWindow : Window
         tb.Focus();
 
     }
+
+    private void Button_Click_6(object sender, RoutedEventArgs e)
+    {
+        if(sender is Button b)
+        {
+            tb.Text += b.Content;
+        }
+        
+    }
+    int a = 4;
+    private void Button_Click_7(object sender, RoutedEventArgs e)
+    {
+        string append="";
+        Task.Run(() =>
+        {
+            --a;
+            switch (a)
+            {
+                case 0:
+                    append = "2";
+                    break;
+                case 1:
+                    append = "a";
+                    break;
+                case 2:
+                    append = "b";
+                    break;
+                case 3:
+                    append = "c";
+                    break;
+                default:
+                    a = 4;
+                    break;
+            }
+            
+            Dispatcher.Invoke( async () =>
+            {
+                await Task.Delay(1000);
+                tb.Text += append;
+            });
+        });
+        tb.Text += append;
+    }
+    
 }
