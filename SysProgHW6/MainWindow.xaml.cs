@@ -49,10 +49,6 @@ public partial class MainWindow : Window
     {
         tb.Text = tb.Text;
         fittingWords.Clear();
-        //if(tb.SelectedItem is not null)
-        //{
-        //    tb.Text= tb.SelectedItem.ToString();
-        //}
     }
 
     private void Button_Click_3(object sender, RoutedEventArgs e)
